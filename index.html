@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滕王商庄 | 商承千古 庄立百年</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            scroll-behavior:smooth;
+        }
+        :root{
+            --gold:#B8860B;
+            --gold-light:#D4AF37;
+            --black:#080808;
+            --gray-deep:#151515;
+            --gray-text:#999999;
+            --white:#f3efe6;
+        }
+        body{
+            /* 去除谷歌字体，换国内绝对兼容商务字体，不会报错 */
+            font-family:"SimSun","Microsoft YaHei",sans-serif;
+            background:var(--black);
+            color:#fff;
+            line-height:1.9;
+            overflow-x:hidden;
+            font-weight:400;
+        }
+        /* ========== 导航栏｜纯正集团哑光磨砂 ========== */
+        nav{
+            width:100%;
+            padding:1.4rem 7%;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            position:fixed;
+            top:0;
+            z-index:999;
+            backdrop-filter:blur(10px);
+            background:rgba(8,8,8,0.75);
+            border-bottom:1px solid rgba(184,134,11,0.12);
+            transition:all 0.5s ease;
+        }
+        nav.scrolled{
+            background:rgba(8,8,8,0.96);
+            box-shadow:0 4px 30px rgba(0,0,0,0.4);
+        }
+        .logo{
+            display:flex;
+            align-items:center;
+            gap:12px;
+        }
+        .logo img{
+            height:52px;
+            width:auto;
+        }
+        .logo-text{
+            font-size:1.7rem;
+            color:var(--gold);
+            letter-spacing:3px;
+            font-weight:500;
+        }
+        .nav-menu{
+            display:flex;
+            gap:2.8rem;
+        }
+        .nav-menu a{
+            color:#cccccc;
+            text-decoration:none;
+            font-size:0.95rem;
+            letter-spacing:1px;
+            transition:color 0.3s ease;
+        }
+        .nav-menu a:hover{
+            color:var(--gold);
+        }
+        .hamburger{
+            display:none;
+            color:var(--gold);
+            font-size:24px;
+            cursor:pointer;
+        }
+        .mobile-menu{
+            position:fixed;
+            top:80px;
+            left:-100%;
+            width:100%;
+            height:100vh;
+            background:rgba(8,8,8,0.98);
+            backdrop-filter:blur(16px);
+            transition:left 0.4s ease;
+            padding-top:50px;
+            text-align:center;
+        }
+        .mobile-menu.active{
+            left:0;
+        }
+        .mobile-menu a{
+            display:block;
+            color:#ccc;
+            text-decoration:none;
+            margin:25px 0;
+            font-size:1.1rem;
+        }
+        /* ========== 首屏｜无外链纯渐变背景（永久不失效） ========== */
+        .banner{
+            width:100%;
+            height:100vh;
+            /* 彻底删除外部图片，改用高级黑金国风渐变，不会裂开、不会失效 */
+            background:linear-gradient(120deg,#080808,#14120e,#080808);
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+        }
+        .banner h1{
+            font-size:4.5rem;
+            color:var(--gold);
+            font-weight:500;
+            letter-spacing:12px;
+            margin-bottom:1.2rem;
+        }
+        .banner p{
+            font-size:1.3rem;
+            color:#aaaaaa;
+            letter-spacing:4px;
+            margin-bottom:3.5rem;
+        }
+        .banner-btn a{
+            text-decoration:none;
+            color:var(--gold);
+            border:1px solid rgba(184,134,11,0.5);
+            padding:1rem 2.6rem;
+            margin:0 12px;
+            font-size:0.95rem;
+            transition:all 0.4s ease;
+        }
+        .banner-btn a:hover{
+            background:rgba(184,134,11,0.15);
+            border-color:var(--gold);
+        }
+        /* ========== 通用区块｜超大留白 官方排版 ========== */
+        section{
+            padding:6.5rem 8%;
+            opacity:0;
+            transform:translateY(25px);
+            transition:all 0.9s ease;
+        }
+        section.show{
+            opacity:1;
+            transform:translateY(0);
+        }
+        .sec-title{
+            text-align:center;
+            font-size:2.2rem;
+            color:var(--gold);
+            letter-spacing:4px;
+            font-weight:500;
+            margin-bottom:5rem;
+            position:relative;
+        }
+        .sec-title::after{
+            content:"";
+            width:60px;
+            height:1px;
+            background:var(--gold);
+            position:absolute;
+            bottom:-15px;
+            left:50%;
+            transform:translateX(-50%);
+        }
+        /* ========== 关于我们｜极简商务 ========== */
+        .about{
+            background:var(--white);
+            color:#111;
+        }
+        .about-wrap{
+            max-width:950px;
+            margin:0 auto;
+            text-align:center;
+            font-size:1.05rem;
+            color:#444;
+            line-height:2.1;
+        }
+        /* ========== 产业布局｜克制卡片 无花哨特效 ========== */
+        .business-wrap{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+            gap:2rem;
+            max-width:1250px;
+            margin:0 auto;
+        }
+        .card{
+            background:var(--gray-deep);
+            border:1px solid rgba(184,134,11,0.1);
+            padding:2.6rem 1.6rem;
+            border-radius:4px;
+            transition:all 0.4s ease;
+        }
+        .card:hover{
+            transform:translateY(-6px);
+            border-color:rgba(184,134,11,0.35);
+            box-shadow:0 12px 35px rgba(0,0,0,0.35);
+        }
+        .card h3{
+            color:var(--gold);
+            font-size:1.25rem;
+            margin-bottom:1rem;
+            font-weight:500;
+        }
+        .card p{
+            color:var(--gray-text);
+            font-size:0.95rem;
+        }
+        /* ========== 品牌文化 ========== */
+        .culture{
+            background:var(--white);
+            color:#111;
+        }
+        .culture-item{
+            max-width:900px;
+            margin:0 auto;
+            text-align:center;
+        }
+        .culture-item p{
+            font-size:1.08rem;
+            color:#333;
+            margin:1.4rem 0;
+            letter-spacing:1px;
+        }
+        /* ========== 商务合作 ========== */
+        .contact{
+            text-align:center;
+        }
+        .contact p{
+            color:#aaa;
+            margin:1.2rem 0;
+            font-size:1rem;
+        }
+        /* ========== 页脚｜官方极简版权 ========== */
+        footer{
+            padding:2.5rem;
+            text-align:center;
+            border-top:1px solid rgba(184,134,11,0.1);
+            color:#666;
+            font-size:0.9rem;
+        }
+        /* ========== 移动端严格适配 ========== */
+        @media(max-width:768px){
+            .nav-menu{display:none;}
+            .hamburger{display:block;}
+            .banner h1{font-size:2.4rem;letter-spacing:6px;}
+            .banner p{font-size:1rem;}
+            .banner-btn a{display:block;margin:15px auto;width:180px;}
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav id="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="滕王商庄">
+            <div class="logo-text">滕王商庄</div>
+        </div>
+        <div class="nav-menu">
+            <a href="#home">首页</a>
+            <a href="#about">关于商庄</a>
+            <a href="#business">产业布局</a>
+            <a href="#culture">品牌文化</a>
+            <a href="#contact">商务合作</a>
+            <a href="#join">商家入驻</a>
+        </div>
+        <div class="hamburger" id="menuBtn">☰</div>
+    </nav>
+
+    <!-- 移动端菜单 -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home">首页</a>
+        <a href="#about">关于商庄</a>
+        <a href="#business">产业布局</a>
+        <a href="#culture">品牌文化</a>
+        <a href="#contact">商务合作</a>
+        <a href="#join">商家入驻</a>
+    </div>
+
+    <!-- 首屏 -->
+    <section class="banner" id="home">
+        <h1>滕王商庄</h1>
+        <p>商承千古文脉 庄立百年基业</p>
+        <div class="banner-btn">
+            <a href="#about">品牌概况</a>
+            <a href="#contact">商务洽谈</a>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section class="about" id="about">
+        <h2 class="sec-title">关于商庄</h2>
+        <div class="about-wrap">
+            <p>滕王商庄，是一家立足东方文化底蕴、深耕现代多元产业的综合性控股企业集团。公司秉持稳健经营、长期主义的发展理念，布局数字科技、本地生活、跨境贸易、文旅品牌四大核心板块，构建可持续发展的商业生态矩阵。</p>
+            <p style="margin-top:20px;">以诚信为立身之本，以创新为发展之源，以共赢为合作之道。滕王商庄严守企业底线，规范经营、稳步扩张，持续为合作伙伴、合作商家、社会市场创造稳定、长期、可靠的商业价值。</p>
+        </div>
+    </section>
+
+    <!-- 产业布局 -->
+    <section id="business">
+        <h2 class="sec-title">产业布局</h2>
+        <div class="business-wrap">
+            <div class="card">
+                <h3>无忧服务数字科技</h3>
+                <p>为中小商户提供数字化系统搭建、商城开发、支付体系、智慧管理一站式技术服务。</p>
+            </div>
+            <div class="card">
+                <h3>Muse同城本地生活</h3>
+                <p>搭建同城便民服务平台，涵盖外卖、跑腿、同城配送，构建本地化生活服务生态。</p>
+            </div>
+            <div class="card">
+                <h3>跨境贸易金融服务</h3>
+                <p>整合全球商贸资源，提供合规跨境收付、渠道对接、国际贸易咨询服务。</p>
+            </div>
+            <div class="card">
+                <h3>国风文旅品牌孵化</h3>
+                <p>深耕东方文化IP，专注国风品牌策划、视觉设计、实体孵化、连锁运营管理。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 品牌文化 -->
+    <section class="culture" id="culture">
+        <h2 class="sec-title">品牌文化</h2>
+        <div class="culture-item">
+            <p><strong>诚信为本｜守正立身，恒行致远</strong></p>
+            <p><strong>创新致远｜融于时代，迭代生长</strong></p>
+            <p><strong>共赢共生｜携手同行，基业长青</strong></p>
+        </div>
+    </section>
+
+    <!-- 商务合作 -->
+    <section class="contact" id="contact">
+        <h2 class="sec-title">商务合作 & 商家入驻</h2>
+        <p>战略合作｜项目对接｜渠道加盟｜商家入驻｜品牌联营</p>
+        <p>官方邮箱：contact@tengwangshangzhuang.com</p>
+        <p>联系电话：敬请预留</p>
+        <p>办公地址：敬请预留</p>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        © 2026 滕王商庄控股集团 版权所有 ｜ 网站备案号：预留填写
+    </footer>
+
+    <script>
+        // 导航滚动哑光加深
+        const nav = document.getElementById('navbar');
+        window.addEventListener('scroll',()=>{
+            if(window.scrollY > 60){
+                nav.classList.add('scrolled');
+            }else{
+                nav.classList.remove('scrolled');
+            }
+        });
+        // 移动端汉堡菜单
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuBtn.onclick = ()=>{
+            mobileMenu.classList.toggle('active');
+        };
+        // 极简滚动渐入（最慢、最稳重）
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver((entries)=>{
+            entries.forEach(item=>{
+                if(item.isIntersecting) item.target.classList.add('show');
+            })
+        },{threshold:0.08});
+        sections.forEach(s=>observer.observe(s));
+    </script>
+</body>
+</html>
