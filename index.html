@@ -85,20 +85,33 @@ nav {
     color: #b8860b;
 }
 
-/* 首屏Banner —— 已缩短高度，不再空旷 */
+/* 轮播首屏 */
 .banner {
+    position: relative;
     width: 100%;
     height: 75vh;
-    background: linear-gradient(180deg, rgba(5,5,5,0.9) 0%, rgba(5,5,5,1) 100%);
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding-top: 60px;
+    background: linear-gradient(180deg, rgba(5,5,5,0.9) 0%, rgba(5,5,5,1) 100%);
+    opacity: 0;
+    transition: opacity 1.2s ease;
 }
 
-.banner h1 {
+.slide.active {
+    opacity: 1;
+}
+
+.slide h1 {
     font-size: 46px;
 }
 
@@ -121,7 +134,28 @@ nav {
     background: #b8860b;
 }
 
-/* 通用板块样式 —— 减少上下间距 */
+.dots {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #666;
+    cursor: pointer;
+}
+
+.dot.active {
+    background: #b8860b;
+}
+
+/* 通用板块样式 */
 section {
     padding: 3.5rem 8%;
     text-align: center;
@@ -188,9 +222,36 @@ section {
     background: #121212;
 }
 
-/* 商务合作 */
+/* 商务合作 - 你要的横3竖3网格布局 */
 .contact {
     background: #050505;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 900px;
+    margin: 30px auto 0;
+}
+
+.contact-item {
+    padding: 15px;
+    border: 1px solid rgba(184,134,11,0.2);
+    border-radius: 8px;
+}
+
+.contact-item a {
+    color: #1E88E5;
+    text-decoration: none;
+}
+
+.contact-item a:hover {
+    color: #0d63b5;
+}
+
+.contact-address {
+    margin-top: 30px;
 }
 
 /* 链接样式 */
@@ -217,16 +278,17 @@ footer {
     .nav-menu {
         display: none;
     }
-    .banner h1 {
+    .slide h1 {
         font-size: 32px;
     }
-    .banner p {
-        font-size: 1rem;
+    .contact-grid {
+        grid-template-columns: 1fr;
     }
 }
 </style>
 </head>
 <body>
+
     <!-- 导航栏 -->
     <nav id="navbar">
         <div class="logo">
@@ -254,13 +316,34 @@ footer {
         <a href="#join">商家入驻</a>
     </div>
 
-    <!-- 首屏 -->
+    <!-- 轮播首屏 -->
     <section class="banner" id="home">
-        <h1>滕王商庄</h1>
-        <p>商承千古文脉 庄立百年基业</p>
-        <div class="banner-btn">
-            <a href="#about">品牌概况</a>
-            <a href="#contact">商务洽谈</a>
+        <div class="slide active">
+            <h1>滕王商庄</h1>
+            <p>商承千古文脉 庄立百年基业</p>
+            <div class="banner-btn">
+                <a href="#about">品牌概况</a>
+                <a href="#contact">商务洽谈</a>
+            </div>
+        </div>
+        <div class="slide">
+            <h1>产业布局</h1>
+            <p>四大核心板块 · 多元生态发展</p>
+            <div class="banner-btn">
+                <a href="#business">查看产业</a>
+            </div>
+        </div>
+        <div class="slide">
+            <h1>诚邀合作</h1>
+            <p>诚信为本 · 共赢共生 · 共创未来</p>
+            <div class="banner-btn">
+                <a href="#contact">立即联系</a>
+            </div>
+        </div>
+        <div class="dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
         </div>
     </section>
 
@@ -268,7 +351,7 @@ footer {
     <section class="about" id="about">
         <h2 class="sec-title">关于商庄</h2>
         <div class="about-wrap">
-            <p>滕王商庄，是一家缅甸数字服务有限公司、深耕现代多元产业的综合性控股企业集团。公司秉持稳健经营、长期主义的发展理念，布局数字科技、本地生活、跨境贸易、文旅品牌四大核心板块，构建可持续发展的商业生态矩阵。</p>
+            <p>滕王商庄，是一家立足东方文化底蕴、深耕现代多元产业的综合性控股企业集团。公司秉持稳健经营、长期主义的发展理念，布局数字科技、本地生活、跨境贸易、文旅品牌四大核心板块，构建可持续发展的商业生态矩阵。</p>
             <p style="margin-top:20px;">以诚信为立身之本，以创新为发展之源，以共赢为合作之道。滕王商庄严守企业底线，规范经营、稳步扩张，持续为合作伙伴、合作商家、社会市场创造稳定、长期、可靠的商业价值。</p>
         </div>
     </section>
@@ -306,39 +389,36 @@ footer {
         </div>
     </section>
 
-    <!-- 商务合作 -->
-<section class="contact" id="contact">
-    <h2 class="sec-title">商务合作 & 商家入驻</h2>
-    <p>
-        战略合作 ✈️ 
-        <a href="https://t.me/wysz88" style="color: #1E88E5; text-decoration: none;">立即联系</a>
-    </p>
-    <p>
-        项目对接 ✈️ 
-        <a href="https://t.me/wysz88" style="color: #1E88E5; text-decoration: none;">立即联系</a>
-    </p>
-    <p>
-        渠道加盟 ✈️ 
-        <a href="https://t.me/wysz88" style="color: #1E88E5; text-decoration: none;">立即联系</a>
-    </p>
-    <p>
-        商家入驻 ✈️ 
-        <a href="https://t.me/wysz88" style="color: #1E88E5; text-decoration: none;">立即联系</a>
-    </p>
-    <p>
-        品牌联营 ✈️ 
-        <a href="https://t.me/wysz88" style="color: #1E88E5; text-decoration: none;">立即联系</a>
-    </p>
-    <p>
-        官方邮箱：
-        <a href="mailto:tengwannnge78@gmail.com" style="color: #1E88E5; text-decoration: none;">发送邮件咨询</a>
-    </p>
-    <p>
-        联系电话：
-        <a href="tel:09688337441" style="color: #1E88E5; text-decoration: none;">立即拨打</a>
-    </p>
-    <p>办公地址：缅甸掸邦北境木姐市</p>
-</section>
+    <!-- 商务合作 - 横3竖3网格布局 -->
+    <section class="contact" id="contact">
+        <h2 class="sec-title">商务合作 & 商家入驻</h2>
+        <div class="contact-grid">
+            <div class="contact-item">
+                <p>战略合作 ✈️ <a href="https://t.me/wysz88">立即联系</a></p>
+            </div>
+            <div class="contact-item">
+                <p>项目对接 ✈️ <a href="https://t.me/wysz88">立即联系</a></p>
+            </div>
+            <div class="contact-item">
+                <p>渠道加盟 ✈️ <a href="https://t.me/wysz88">立即联系</a></p>
+            </div>
+            <div class="contact-item">
+                <p>商家入驻 ✈️ <a href="https://t.me/wysz88">立即联系</a></p>
+            </div>
+            <div class="contact-item">
+                <p>品牌联营 ✈️ <a href="https://t.me/wysz88">立即联系</a></p>
+            </div>
+            <div class="contact-item">
+                <p>官方邮箱：<a href="mailto:tengwannnge78@gmail.com">发送邮件咨询</a></p>
+            </div>
+            <div class="contact-item">
+                <p>联系电话：<a href="tel:09688337441">立即拨打</a></p>
+            </div>
+        </div>
+        <div class="contact-address">
+            <p>办公地址：缅甸掸邦北境木姐市</p>
+        </div>
+    </section>
 
     <!-- 页脚 -->
     <footer>
@@ -346,6 +426,7 @@ footer {
     </footer>
 
     <script>
+        // 导航滚动
         const nav = document.getElementById('navbar');
         window.addEventListener('scroll',()=>{
             if(window.scrollY > 60){
@@ -354,11 +435,15 @@ footer {
                 nav.classList.remove('scrolled');
             }
         });
+
+        // 移动端菜单
         const menuBtn = document.getElementById('menuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
         menuBtn.onclick = ()=>{
             mobileMenu.classList.toggle('active');
         };
+
+        // 滚动动画
         const sections = document.querySelectorAll('section');
         const observer = new IntersectionObserver((entries)=>{
             entries.forEach(item=>{
@@ -366,6 +451,31 @@ footer {
             })
         },{threshold:0.08});
         sections.forEach(s=>observer.observe(s));
+
+        // 轮播功能
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        let current = 0;
+
+        function showSlide(index) {
+            slides.forEach((s,i)=>{
+                s.classList.toggle('active', i === index);
+                dots[i].classList.toggle('active', i === index);
+            });
+        }
+
+        function nextSlide() {
+            current = (current + 1) % slides.length;
+            showSlide(current);
+        }
+
+        setInterval(nextSlide, 5000);
+        dots.forEach((d,i)=>{
+            d.onclick = ()=>{
+                current = i;
+                showSlide(current);
+            }
+        });
     </script>
 </body>
 </html>
