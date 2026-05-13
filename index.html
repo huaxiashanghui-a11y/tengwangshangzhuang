@@ -225,27 +225,36 @@ footer {
     </section>
 
     <!-- 产业布局 -->
-    <section id="business">
-        <h2 class="sec-title">产业布局</h2>
-        <div class="business-wrap">
-            <div class="card">
-                <h3>无忧服务数字科技</h3>
-                <p>为中小商户提供数字化系统搭建、商城开发、支付体系、智慧管理一站式技术服务。</p>
-            </div>
-            <div class="card">
-                <h3>Muse同城本地生活</h3>
-                <p>搭建同城便民服务平台，涵盖外卖、跑腿、同城配送，构建本地化生活服务生态。</p>
-            </div>
-            <div class="card">
-                <h3>跨境贸易金融服务</h3>
-                <p>整合全球商贸资源，提供合规跨境收付、渠道对接、国际贸易咨询服务。</p>
-            </div>
-            <div class="card">
-                <h3>国风文旅品牌孵化</h3>
-                <p>深耕东方文化IP，专注国风品牌策划、视觉设计、实体孵化、连锁运营管理。</p>
-            </div>
-        </div>
-    </section>
+    /* 产业布局卡片样式 */
+.business-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.business-cards .card {
+  background: #111;
+  border: 1px solid #b8860b;
+  border-radius: 10px;
+  padding: 25px;
+  width: 260px;
+  text-align: center;
+  color: #fff;
+}
+
+.business-cards .card h3 {
+  color: #b8860b;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.business-cards .card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #ddd;
+}
 
     <!-- 品牌文化 -->
     <section class="culture" id="culture">
