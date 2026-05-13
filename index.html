@@ -42,7 +42,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 8%;
+    padding: 1.2rem 8%;
     position: fixed;
     top: 0;
     width: 100%;
@@ -85,39 +85,62 @@ nav {
     color: #b8860b;
 }
 
-/* 首屏Banner */
+/* 首屏Banner —— 已缩短高度，不再空旷 */
 .banner {
     width: 100%;
-    height: 100vh;
+    height: 75vh;
     background: linear-gradient(180deg, rgba(5,5,5,0.9) 0%, rgba(5,5,5,1) 100%);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding-top: 80px;
+    padding-top: 60px;
 }
 
-/* 通用板块样式 */
+.banner h1 {
+    font-size: 46px;
+}
+
+.banner-btn {
+    margin-top: 20px;
+    display: flex;
+    gap: 16px;
+}
+
+.banner-btn a {
+    padding: 10px 24px;
+    border: 1px solid #b8860b;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.banner-btn a:hover {
+    background: #b8860b;
+}
+
+/* 通用板块样式 —— 减少上下间距 */
 section {
-    padding: 6rem 8%;
+    padding: 3.5rem 8%;
     text-align: center;
 }
 
 .sec-title {
-    font-size: 36px;
+    font-size: 32px;
     color: #b8860b;
-    margin-bottom: 40px;
+    margin-bottom: 26px;
     position: relative;
 }
 
 .sec-title::after {
     content: "";
     position: absolute;
-    bottom: -10px;
+    bottom: -8px;
     left: 50%;
     transform: translateX(-50%);
-    width: 60px;
+    width: 50px;
     height: 2px;
     background: #b8860b;
 }
@@ -136,28 +159,28 @@ section {
 .business-cards {
   display: flex;
   flex-wrap: wrap;
-  gap: 22px;
+  gap: 18px;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 .business-cards .card {
   background: #111;
   border: 1px solid #b8860b;
-  border-radius: 12px;
-  padding: 28px;
-  width: 270px;
+  border-radius: 10px;
+  padding: 24px;
+  width: 260px;
   color: #fff;
   text-align: center;
 }
 .business-cards .card h3 {
   color: #d4af37;
-  font-size: 17px;
-  margin-bottom: 12px;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 .business-cards .card p {
   font-size: 14px;
   color: #eee;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 /* 品牌文化 */
@@ -182,7 +205,7 @@ a:hover {
 
 /* 页脚 */
 footer {
-    padding: 30px;
+    padding: 24px;
     text-align: center;
     background: #000;
     color: #666;
@@ -195,8 +218,7 @@ footer {
         display: none;
     }
     .banner h1 {
-        font-size: 2.4rem;
-        letter-spacing: 6px;
+        font-size: 32px;
     }
     .banner p {
         font-size: 1rem;
@@ -246,7 +268,7 @@ footer {
     <section class="about" id="about">
         <h2 class="sec-title">关于商庄</h2>
         <div class="about-wrap">
-            <p>滕王商庄，是一家立足东方文化底蕴、深耕现代多元产业的综合性控股企业集团。公司秉持稳健经营、长期主义的发展理念，布局数字科技、本地生活、跨境贸易、文旅品牌四大核心板块，构建可持续发展的商业生态矩阵。</p>
+            <p>滕王商庄，是一家缅甸数字服务有限公司、深耕现代多元产业的综合性控股企业集团。公司秉持稳健经营、长期主义的发展理念，布局数字科技、本地生活、跨境贸易、文旅品牌四大核心板块，构建可持续发展的商业生态矩阵。</p>
             <p style="margin-top:20px;">以诚信为立身之本，以创新为发展之源，以共赢为合作之道。滕王商庄严守企业底线，规范经营、稳步扩张，持续为合作伙伴、合作商家、社会市场创造稳定、长期、可靠的商业价值。</p>
         </div>
     </section>
